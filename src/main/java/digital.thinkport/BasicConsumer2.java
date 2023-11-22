@@ -11,7 +11,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Properties;
 
-public class BasicConsumer {
+public class BasicConsumer2 {
     public static void main(String[] args) {
         Properties properties = new Properties();
         properties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -19,8 +19,8 @@ public class BasicConsumer {
         properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, Topology.AutoOffsetReset.EARLIEST.name().toLowerCase());
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, "my-consumer-group2");
-        properties.put(ConsumerConfig.GROUP_INSTANCE_ID_CONFIG, "consumer1");
-       // properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
+        properties.put(ConsumerConfig.GROUP_INSTANCE_ID_CONFIG, "consumer2");
+        //properties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
 
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(properties);
         consumer.subscribe(List.of("my-first-kafka-topic2"));

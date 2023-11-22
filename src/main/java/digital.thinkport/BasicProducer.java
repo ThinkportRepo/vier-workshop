@@ -20,7 +20,8 @@ public class BasicProducer {
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
 
         KafkaProducer<String, String> producer = new KafkaProducer<>(properties);
-        producer.send(new ProducerRecord<>("my-first-kafka-topic", "value"));
+        producer.send(new ProducerRecord<>("my-first-kafka-topic2", "1","value"));
+        producer.send(new ProducerRecord<>("my-first-kafka-topic2", "2","value"));
         producer.flush();
 
     }

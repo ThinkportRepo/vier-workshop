@@ -78,7 +78,7 @@ The Kafka consumers must be properly configured to work in a group.
 
 ### Part 3: Test the application and verify the different commit modes under normal circumstances and also in error scenarios
 
- ## Transactional Producer
+## Transactional Producer
 1. Write a transactional producer. For that, set the transactional.id property
 2. Write an example where a transaction is started and committed. Check on the consumer side, that the message is received.
 3. Change the isolation.leve]()l on the consumer side to read_committed. Add a delay in the producer before committing. What' your observation?
