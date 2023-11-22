@@ -1,0 +1,1187 @@
+{
+	"info": {
+		"_postman_id": "3bd85c19-dab0-470a-a15a-e0d062ac5469",
+		"name": "Schema Registry",
+		"description": "Collection of most useful Schema Registry API handlers to manage schemas within it",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31283047"
+	},
+	"item": [
+		{
+			"name": "Subjects",
+			"item": [
+				{
+					"name": "List subjects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/subjects?deleted=false",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"subjects"
+							],
+							"query": [
+								{
+									"key": "subjectPrefix",
+									"value": "",
+									"description": "Empty string to list subjects in the default context, or specify value for desired context. If this flag is not included, GET /subjects returns all subjects across all contexts.",
+									"disabled": true
+								},
+								{
+									"key": "deleted",
+									"value": "false",
+									"description": "Set to \"true\" to list both current and soft-deleted subjects"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check if schema registered for a subject",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schema\": \"{\\\"type\\\":\\\"string\\\"}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/subjects/:subject?normalize=true",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"subjects",
+								":subject"
+							],
+							"query": [
+								{
+									"key": "normalize",
+									"value": "true",
+									"description": "Set to \"true\" to normalize the schema"
+								}
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register schema for a subject",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schema\": \"{\\\"type\\\":\\\"string\\\"}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/subjects/:subject/versions?normalize=true",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"subjects",
+								":subject",
+								"versions"
+							],
+							"query": [
+								{
+									"key": "normalize",
+									"value": "true",
+									"description": "Set to \"true\" to normalize the schema"
+								}
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List schema versions for a subject",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/subjects/:subject/versions",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"subjects",
+								":subject",
+								"versions"
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve latest subject schema (with metadata)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/subjects/:subject/versions/latest",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"subjects",
+								":subject",
+								"versions",
+								"latest"
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve latest subject schema (only schema)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/subjects/:subject/versions/latest/schema",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"subjects",
+								":subject",
+								"versions",
+								"latest",
+								"schema"
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve subject schema by version (with metadata)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/subjects/:subject/versions/:version",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"subjects",
+								":subject",
+								"versions",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								},
+								{
+									"key": "version",
+									"value": "1",
+									"description": "Schema version"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve subject schema by version (only schema)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/subjects/:subject/versions/:version/schema",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"subjects",
+								":subject",
+								"versions",
+								":version",
+								"schema"
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								},
+								{
+									"key": "version",
+									"value": "1",
+									"description": "Schema version"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete latest subject schema",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/subjects/:subject/versions/latest?permanent=false",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"subjects",
+								":subject",
+								"versions",
+								"latest"
+							],
+							"query": [
+								{
+									"key": "permanent",
+									"value": "false",
+									"description": "When \"true\" then hard delete, see also: https://docs.confluent.io/platform/current/schema-registry/schema-deletion-guidelines.html"
+								}
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete subject schema by version",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/subjects/:subject/versions/:version?permanent=false",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"subjects",
+								":subject",
+								"versions",
+								":version"
+							],
+							"query": [
+								{
+									"key": "permanent",
+									"value": "false",
+									"description": "When \"true\" then hard delete, see also: https://docs.confluent.io/platform/current/schema-registry/schema-deletion-guidelines.html"
+								}
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								},
+								{
+									"key": "version",
+									"value": "1",
+									"description": "Schema version"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete subject completely",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/subjects/:subject?permanent=false",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"subjects",
+								":subject"
+							],
+							"query": [
+								{
+									"key": "permanent",
+									"value": "false",
+									"description": "When \"true\" then hard delete, see also: https://docs.confluent.io/platform/current/schema-registry/schema-deletion-guidelines.html"
+								}
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Handlers to manipulate schema subjects"
+		},
+		{
+			"name": "Schemas",
+			"item": [
+				{
+					"name": "List supported schema types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/schemas/types",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"schemas",
+								"types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve schema by global ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/schemas/ids/:id",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"schemas",
+								"ids",
+								":id"
+							],
+							"query": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Add subject name to this request to look for the subject in all contexts starting with the default context, and return the schema with the ID from that context",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Global Schema ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve schema by global ID (only schema)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/schemas/ids/:id",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"schemas",
+								"ids",
+								":id"
+							],
+							"query": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Add subject name to this request to look for the subject in all contexts starting with the default context, and return the schema with the ID from that context",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Global Schema ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve subject/version pairs by global ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/schemas/ids/:id/versions",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"schemas",
+								"ids",
+								":id",
+								"versions"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Global Schema ID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Handlers to manipulate schemas"
+		},
+		{
+			"name": "Mode",
+			"item": [
+				{
+					"name": "Retrieve registry mode",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/mode",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"mode"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set registry mode",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mode\": \"READWRITE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/mode?force=false",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"mode"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "false",
+									"description": "Set to \"true\" to force a mode change even if the Schema Registry has existing schemas. This can be useful in disaster recovery (DR) scenarios using Schema Linking."
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve subject-level mode",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/mode/:subject",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"mode",
+								":subject"
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set subject-level mode",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mode\": \"READWRITE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/mode/:subject?force=false",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"mode",
+								":subject"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "false",
+									"description": "Set to \"true\" to force a mode change even if the Schema Registry has existing schemas. This can be useful in disaster recovery (DR) scenarios using Schema Linking."
+								}
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete subject-level mode",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"mode\": \"READWRITE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/mode/:subject",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"mode",
+								":subject"
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Handlers to manipulate Schema Registry mode"
+		},
+		{
+			"name": "Compatibility",
+			"item": [
+				{
+					"name": "Retrieve global compatibility level",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/config",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set global compatibility level",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"compatibility\": \"FULL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/config",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve subject-level compatibility level",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/config/:subject?defaultToGlobal=true",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"config",
+								":subject"
+							],
+							"query": [
+								{
+									"key": "defaultToGlobal",
+									"value": "true",
+									"description": "Set to \"false\" to only show the compatibility level, if any, set at the subject level"
+								}
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set subject-level compatibility level",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"compatibility\": \"FULL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/config/:subject",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"config",
+								":subject"
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test schema for compatibility (specific version)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schema\": \"{\\\"type\\\":\\\"string\\\"}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/compatibility/subjects/:subject/versions/:version?verbose=true",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"compatibility",
+								"subjects",
+								":subject",
+								"versions",
+								":version"
+							],
+							"query": [
+								{
+									"key": "verbose",
+									"value": "true",
+									"description": "Set to true to output the reason a schema fails the compatibility test, in cases where it fails."
+								}
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								},
+								{
+									"key": "version",
+									"value": "latest"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Test schema for compatibility (all versions)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"schema\": \"{\\\"type\\\":\\\"string\\\"}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/compatibility/subjects/:subject/versions?verbose=true",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"compatibility",
+								"subjects",
+								":subject",
+								"versions"
+							],
+							"query": [
+								{
+									"key": "verbose",
+									"value": "true",
+									"description": "Set to true to output the reason a schema fails the compatibility test, in cases where it fails."
+								}
+							],
+							"variable": [
+								{
+									"key": "subject",
+									"value": "my-topic-value",
+									"description": "Subject name, usually <topic-name>-value or <topic-name>-key"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Handlers to manipulate Schema Registry compatibilty mode globally and per subject"
+		},
+		{
+			"name": "Exporters",
+			"item": [
+				{
+					"name": "List contexts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/contexts",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"contexts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List schema exporters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/exporters",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"exporters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create schema exporter",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"test-exporter\",\r\n  \"contextType\": \"CUSTOM\",\r\n  \"context\": \"test-context\",\r\n  \"subjects\": [\"foo\"],\r\n  \"subjectRenameFormat\": \"test_${subject}\",\r\n  \"config\": {\r\n    \"schema.registry.url\": \"<Physical SR Endpoint>\",\r\n    \"basic.auth.credentials.source\": \"USER_INFO\",\r\n    \"basic.auth.user.info\": \"<SR Credentials>\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/exporters",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"exporters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update schema exporter",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"contextType\": \"CUSTOM\",\r\n  \"context\": \"test-context\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/exporters/:exporter",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"exporters",
+								":exporter"
+							],
+							"variable": [
+								{
+									"key": "exporter",
+									"value": "my-exporter",
+									"description": "Exporter name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve schema exporter overview",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/exporters/:exporter",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"exporters",
+								":exporter"
+							],
+							"variable": [
+								{
+									"key": "exporter",
+									"value": "my-exporter",
+									"description": "Exporter name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve schema exporter status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/exporters/:exporter/status",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"exporters",
+								":exporter",
+								"status"
+							],
+							"variable": [
+								{
+									"key": "exporter",
+									"value": "my-exporter",
+									"description": "Exporter name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve schema exporter config",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/exporters/:exporter/config",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"exporters",
+								":exporter",
+								"config"
+							],
+							"variable": [
+								{
+									"key": "exporter",
+									"value": "my-exporter",
+									"description": "Exporter name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pause schema exporter",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/exporters/:exporter/pause",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"exporters",
+								":exporter",
+								"pause"
+							],
+							"variable": [
+								{
+									"key": "exporter",
+									"value": "my-exporter",
+									"description": "Exporter name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Resume schema exporter",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/exporters/:exporter/resume",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"exporters",
+								":exporter",
+								"resume"
+							],
+							"variable": [
+								{
+									"key": "exporter",
+									"value": "my-exporter",
+									"description": "Exporter name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset schema exporter",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/exporters/:exporter/reset",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"exporters",
+								":exporter",
+								"reset"
+							],
+							"variable": [
+								{
+									"key": "exporter",
+									"value": "my-exporter",
+									"description": "Exporter name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete schema exporter",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{SCHEMA_REGISTRY_BASE_URL}}/exporters/:exporter",
+							"host": [
+								"{{SCHEMA_REGISTRY_BASE_URL}}"
+							],
+							"path": [
+								"exporters",
+								":exporter"
+							],
+							"variable": [
+								{
+									"key": "exporter",
+									"value": "my-exporter",
+									"description": "Exporter name"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Handlers to manipulate exporters needed for Schema Linking feature"
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{LDAP_PASSWORD}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{LDAP_USERNAME}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "SCHEMA_REGISTRY_BASE_URL",
+			"value": "http://localhost:8081"
+		}
+	]
+}
