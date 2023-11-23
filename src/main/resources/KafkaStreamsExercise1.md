@@ -1,6 +1,6 @@
 # Kafka streams exercises
 
-## Filter map and peak
+## Filter map and peek
 Create three separate Kafka Streams applications that perform various transformations on data streams. Each application must use a unique output topic and demonstrate different functionalities.
 
 ### Filter Application:
